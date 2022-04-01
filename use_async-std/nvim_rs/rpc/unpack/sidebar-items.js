@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["TryUnpack","Trait to allow seamless conversion from a `Value` to the type it contains. In particular, this should never panic."]]});

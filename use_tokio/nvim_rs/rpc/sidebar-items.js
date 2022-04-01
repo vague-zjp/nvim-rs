@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Value","Represents any valid MessagePack value."]],"mod":[["handler","Handling notifications and request received from neovim"],["model","Decoding and encoding msgpack rpc messages from/to neovim."],["unpack","Tools to unpack a `Value` to something we can use."]]});

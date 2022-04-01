@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["async_std","Functions to spawn a `neovim` session using `async-std`"]],"trait":[["Spawner","A task to generalize spawning a future that returns `()`."]]});

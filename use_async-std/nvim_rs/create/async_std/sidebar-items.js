@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["new_parent","Connect to the neovim instance that spawned this process over stdin/stdout"],["new_path","Connect to a neovim instance via unix socket by path. This is currently only available on Unix for async-std."],["new_tcp","Connect to a neovim instance via tcp"]]});

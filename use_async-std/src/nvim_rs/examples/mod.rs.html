@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/examples/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../nvim_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../nvim_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../nvim_rs/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Examples on how to use [`nvim-rs`](crate).</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The code in question is in the `examples` directory of the project. The</span>
+<span class="doccomment">//! files in `src/examples/` contain the documentation.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Contents</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ### `handler_drop`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! An example showing how to implement cleanup-logic by implementing</span>
+<span class="doccomment">//! [`Drop`](std::ops::Drop) for the [`handler`](crate::rpc::handler::Handler).</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ### `quitting`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! An example showing how to handle quitting in a plugin by catching a [`closed</span>
+<span class="doccomment">//! channel`](crate::error::CallError::is_channel_closed).</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## `scorched_earth`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! A port of a real existing plugin.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## `scorched_earth`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! A port of the `scorched_earth` example to `async-std`.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## `bench_*`</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Some crude benchmarks to measure performance. After running</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```sh</span>
+<span class="doccomment">//! cargo build --examples --features use_tokio --release</span>
+<span class="doccomment">//! cargo build --examples --features use_async-std --release</span>
+<span class="doccomment">//! cargo build --examples --features use_neovim_lib --release</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! (the features aren&#39;t all compatible, so you need to run those separately</span>
+<span class="doccomment">//! indeed) you can run `nvim -u bench_examples.vim`, and after so and so long</span>
+<span class="doccomment">//! get a table in a modified buffer that tells you some numbers.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The benchmarks of `tokio` and `async-std` should be pretty comparable, but</span>
+<span class="doccomment">//! note that tokio&#39;s runtime takes parameters that influence performance.</span>
+<span class="doccomment">//! Tweaking those, I found the runtimes don&#39;t differ by much.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The benchmark of `neovim_lib` (called `bench_sync`) can&#39;t be designed the</span>
+<span class="doccomment">//! way the others are, since they use nested requests. I tried to get around</span>
+<span class="doccomment">//! that somewhat sneakily, but it&#39;s not 100% clear those benchmarks are</span>
+<span class="doccomment">//! equivalent (but, if anything, they should favor neovim-lib a tad).</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">handler_drop</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">quitting</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">scorched_earth</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">scorched_earth_as</span>;
+</code></pre></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nvim_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (0677edc86 2022-03-31)" ></div>
+</body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Scorched earth"><meta name="keywords" content="rust, rustlang, rust-lang, scorched_earth"><title>nvim_rs::examples::scorched_earth - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script>
+    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../nvim_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../nvim_rs/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Module scorched_earth</a></h2><div class="sidebar-elems"><div id="sidebar-vars" data-name="scorched_earth" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../nvim_rs/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">nvim_rs</a>::<wbr><a href="../index.html">examples</a>::<wbr><a class="mod" href="#">scorched_earth</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/nvim_rs/examples/scorched_earth.rs.html#1-85">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="scorched-earth"><a href="#scorched-earth">Scorched earth</a></h2>
+<p>A minimal port of
+<a href="https://github.com/boxofrox/neovim-scorched-earth">scorched earth by boxofrox</a>
+to nvim-rs. Works the same, but foregoes any error handling, removes the
+customisation of color, and removes some abstractions that aren’t helpfull
+in an example.</p>
+<p>Note that this example uses <code>tokio</code>, while <code>scorched_earth_as</code> uses
+async-std.</p>
+<h3 id="usage"><a href="#usage">Usage</a></h3>
+<p>First, build this example via</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo build --example scorched_earth</code></pre></div>
+<p>The binary will be located in <code>target/debug/examples/scorched_earth</code>.</p>
+<p>Follow the
+<a href="https://github.com/boxofrox/neovim-scorched-earth#try-it-out">steps</a>
+described for the original plugin. Of course, you don’t need to build it.
+Before step 4, put</p>
+<div class="example-wrap"><pre class="language-viml"><code>let g:scorched_earth_program = &#39;&lt;path to nvim-rs&gt;/target/debug/examples/scorched_earth&#39;</code></pre></div>
+<p>into <code>init.vim</code>. That’s it, fire it up and enjoy.</p>
+<h3 id="description"><a href="#description">Description</a></h3>
+<p>Some overview over the code:</p>
+<ul>
+<li>
+<p>The associated type for our <a href="../../rpc/handler/trait.Handler.html"><code>Handler</code></a> is
+out stdout. But tokio’s <a href="tokio::io::Stdout"><code>Stdout</code></a> does not implement
+<a href="futures::io::AsyncWrite"><code>futures::io::AsyncWrite</code></a>, so it needs to be
+wrapped in the provided <a href="../../compat/tokio/struct.Compat.html"><code>Compat</code></a> type.</p>
+</li>
+<li>
+<p>The handler struct <code>NeovimHandler</code> needs to contain some plugin state,
+namely two cursor positions <code>start</code> and <code>end</code>. It needs to be <code>Send</code> and
+<code>Sync</code>, and we need mutable access, so we wrap it in a <code>Arc&lt;Mutex&lt;_&gt;&gt;</code>.</p>
+</li>
+<li>
+<p>Implementing the <a href="../../rpc/handler/trait.Handler.html"><code>Handler</code></a> trait requires some magic
+because of the async functions, we we use the
+<a href="https://docs.rs/async-trait/0.1.21/async_trait/"><code>async_trait</code></a> macro.</p>
+</li>
+<li>
+<p>We use <code>Stdout</code> as the type for the <code>Writer</code> because neovim acts as our
+parent, so it reads from our stdout. Note that this is the <a href="tokio::io::Stdout">async
+version</a> from Tokio.</p>
+</li>
+<li>
+<p>We only implement <code>handle_notify</code> since we don’t want to serve requests.
+It gets a <a href="../../neovim/struct.Neovim.html"><code>Neovim</code></a> passed that we can use to send
+requests to neovim. All requests are async methods, so we need to <code>await</code>
+them.</p>
+</li>
+<li>
+<p>The main function is denoted <code>#[tokio::main]</code> to use async notation, but
+it would be perfectly feasible to explicitely create a runtime and use that.</p>
+</li>
+<li>
+<p>After creation of the handler, we connect to neovim via one of the
+<a href="../../create/index.html"><code>new_*</code></a> functions. It gives back a
+<a href="../../neovim/struct.Neovim.html"><code>Neovim</code></a> instance which we could use for requests, and a
+handle for the io loop.</p>
+</li>
+<li>
+<p>The plugin quits by ending the IO task when neovim closes the channel, so
+we don’t need to do anything special. Any cleanup-logic can happen after
+the IO task has finished. Note that we’re loosing access to our
+<a href="../../rpc/handler/trait.Handler.html"><code>Handler</code></a>, so we might need to implement
+<a href="https://doc.rust-lang.org/nightly/core/ops/drop/trait.Drop.html"><code>Drop</code></a> for it, see the
+<a href="../handler_drop/index.html">example</a>.</p>
+</li>
+<li>
+<p>After the IO task has finished, we’re inspecting the errors to see why it
+went. A join error simply gets printed, then we inspect potential errors
+from the io loop itself. First, if we did not see a general reader error, we
+try to send some last notification to the neovim user. Secondly, we quietly
+ignore the channel being closed, because this usually means that it was
+closed by neovim, which isn’t always an error.</p>
+<p><em>Note</em>: A closed channel could still mean an error, so the plugin has the
+option to react to this.</p>
+</li>
+<li>
+<p>As with the other examples, we implement <a href="futures::task::Spawn"><code>Spawn</code></a>
+for our <code>NeovimHandler</code> most trivially.</p>
+</li>
+</ul>
+</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="nvim_rs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (0677edc86 2022-03-31)" ></div>
+</body></html>

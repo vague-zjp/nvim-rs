@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["CallError","A `call` to neovim failed"],["DecodeError","Receiving a message from neovim failed"],["EncodeError","Sending a message to neovim failed"],["InvalidMessage","A message from neovim had an invalid format"],["LoopError","A failure in the io loop"]]});
